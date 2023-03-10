@@ -1,0 +1,28 @@
+From 2364e1f71024564e15f5700027cf6e2ce3ef1369 Mon Sep 17 00:00:00 2001
+From: dharizza <dharizza@3056069.no-reply.drupal.org>
+Date: Thu, 8 Sep 2022 21:41:08 +0000
+Subject: [PATCH] Take default sort order from first exposed sort.
+
+---
+ .../src/Plugin/views/exposed_form/ExposedFormPluginBase.php  | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/core/modules/views/src/Plugin/views/exposed_form/ExposedFormPluginBase.php b/core/modules/views/src/Plugin/views/exposed_form/ExposedFormPluginBase.php
+index 0892bce15d6..4db949d43ee 100644
+--- a/core/modules/views/src/Plugin/views/exposed_form/ExposedFormPluginBase.php
++++ b/core/modules/views/src/Plugin/views/exposed_form/ExposedFormPluginBase.php
+@@ -226,8 +226,9 @@ public function exposedFormAlter(&$form, FormStateInterface $form_state) {
+         $default_sort_order = $this->view->sort[$exposed_sorts[$user_input['sort_by']]]->options['order'];
+       }
+       else {
+-        $first_sort = reset($this->view->sort);
+-        $default_sort_order = $first_sort->options['order'];
++        $first_exposed_sort_id = reset($exposed_sorts);
++        $first_exposed_sort = $this->view->sort[$first_exposed_sort_id];
++        $default_sort_order = $first_exposed_sort->options['order'];
+       }
+ 
+       if (!isset($user_input['sort_by'])) {
+-- 
+GitLab
+
