@@ -8,10 +8,12 @@ hello_world.page:
     #permission: 'access contnet'  
     
 hello_world.page_person:
-  path: /hello/{name}
+  path: '/hello/{name}/{nid}'
   defaults:
     _title: 'Hello World'
     _controller: 'Drupal\hello_world\Controller\HelloController::hello'
   requirements:
     _access: 'TRUE'
-    #permission: 'access contnet'     
+    #permission: 'access contnet'
+
+        
