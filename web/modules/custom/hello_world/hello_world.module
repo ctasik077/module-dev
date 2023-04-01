@@ -2,7 +2,7 @@
 
 /**
  * @file
- * 
+ *
  * Hook implementaitons for Hello World module
  */
 
@@ -11,13 +11,34 @@
   */
 
 function hello_world_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  //ksm($form);
+  //ksm($form_state);
+  //ksm($form_id);
+
+  if ($form_id === 'node_article_form') {
+    $form['options']['#open'] = TRUE;
+  }
+}
+
+/** Implement hook to alternate article field permission for an authenticated */
+
+function hello_world_form_node_article_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['option']['#title'] = "Promotion options for articles";
+  $user =  \Drupal::currentUser();
+  ksm($user->hasPermission('administer content'));
+  $form['field_tags']['#access'] = $user->hasPermission('administer content');
+  /**$user->hasPermission('administer content') returns true or false, the user with permission will have access */
   ksm($form);
-  ksm($form_state);
-  ksm($form_id);  
-  
-if ($form_id === 'node_article_form') {
-  $form['options']['#open'] = TRUE; 
+
+  /** Alternative and simpler, one-line way to do it
+   *
+   * $form['field_tags']['#access'] = \Drupal::currentUser()->hasPermission('administer content');
+  */
+
+  /**Another way to access service
+   * $user = \Drupal::service('current_user');
+   */
 }
-  
-}
- 
+
+/**you create a service when you have a piece of functionality you want
+ * to isolate and use in multiple places */

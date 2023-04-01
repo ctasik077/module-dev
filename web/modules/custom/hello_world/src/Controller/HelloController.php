@@ -30,9 +30,9 @@ class HelloController extends ControllerBase {
         //$title = $node->getTitle();
         //$link = $node->toLink()->toString();
         $url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
-        ksm($url);
+        //ksm($url);
         $link = Link::fromTextAndUrl($node->getTitle(), $url);
-        ksm($link);
+        //ksm($link);
 
         $output = $this->t('Hello @name, The title is @title', ['@name' => $name, '@title' => $link->toString()]);
       }
