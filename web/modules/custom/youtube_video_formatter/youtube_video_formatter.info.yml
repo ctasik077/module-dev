@@ -1,0 +1,7 @@
+name: Youtube Video Formatter
+type: module
+description: Youtube Video Formatter to turn a video IF into youtube video
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - text
